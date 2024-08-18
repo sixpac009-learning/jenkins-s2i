@@ -3,18 +3,22 @@ kind: BuildConfig
 metadata:
   name: custom-jenkins-build
 spec:
-  source:
-    git:
-      uri: https://github.com/custom/repository
-    type: Git
-  strategy:
-    sourceStrategy:
-      from:
-        kind: ImageStreamTag
-        name: jenkins:2
-        namespace: openshift
-    type: Source
   output:
     to:
       kind: ImageStreamTag
-      name: custom-jenkins:latest
+      name: 'custom-jenkins:latest'
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'jenkins:2'
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/sixpac009-learning/jenkins-s2i.git'
+      ref: master
+  triggers:
+    - type: ConfigChange
+  runPolicy: Serial
