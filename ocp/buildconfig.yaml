@@ -18,8 +18,8 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: jenkins:2
-        namespace: openshift
+        namespace: jenkins
+        name: 'jenkins-rhel8:v4.15.0-1723454566'
       env: []
   triggers:
   - type: ConfigChange
