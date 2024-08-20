@@ -76,7 +76,7 @@ mercurial:1260.vdfb_723cdcc81
 nexus-jenkins-plugin:3.11.20210621-093929.6318134
 slack:684.v833089650554
 ssh-credentials:308.ve4497b_ccd8f4
-blueocean-autofavorite:1.2.5
+blueocean-autofavorite:latest
 gitlab-merge-request-jenkins:2.0.0
 javax-mail-api:1.6.2-9
 badge:1.9.1
