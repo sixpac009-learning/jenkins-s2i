@@ -1,0 +1,12 @@
+resources:
+- ../../base
+namespace: jenkins-master
+# nameSuffix: -master
+# commonLabels:
+# - path: metadata/labels
+#   create: true
+# patchesStrategicMerge:
+# - healthcheck_patch.yaml
+# - memorylimit_patch.yaml
+# configurations:
+#   - configuration.yaml

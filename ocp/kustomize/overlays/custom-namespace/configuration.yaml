@@ -1,0 +1,4 @@
+nameSuffix:
+  - version: v1
+    kind: Namespace
+    path: metadata/name

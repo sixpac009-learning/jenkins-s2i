@@ -1,0 +1,52 @@
+resources:
+- ../../base
+namespace: jenkins-bar
+nameSuffix: -foo
+labels:
+  - pairs:
+      app: jenkins-foo
+    includeSelectors: true
+    includeTemplates: true
+patches:
+  - target:
+      kind: RoleBinding
+    patch: |
+      - op: replace
+        path: /subjects/0/name
+        value: jenkins-foo
+  - target:
+      kind: Service
+      name: jenkins
+    patch: |
+      - op: replace
+        path: /metadata/annotations/service.alpha.openshift.io~1dependencies
+        value: '[{"name": "jenkins-jnlp-foo", "namespace": "", "kind": "Service"}]'
+  - target:
+      kind: ServiceAccount
+    patch: |
+      - op: replace
+        path: /metadata/annotations/serviceaccounts.openshift.io~1oauth-redirectreference.jenkins
+        value: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"jenkins-foo"}}'
+  - target:
+      kind: Route
+    patch: |
+      - op: replace
+        path: /spec/to/name
+        value: jenkins-foo
+  - target:
+      kind: Deployment
+    patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: jenkins
+      spec:
+        template:
+          spec:
+            containers:
+              - name: jenkins
+                env:
+                  - name: JENKINS_SERVICE_NAME
+                    value: jenkins-foo
+                  - name: JNLP_SERVICE_NAME
+                    value: jenkins-jnlp-foo
